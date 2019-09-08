@@ -1,0 +1,11 @@
+D:\MyCodes\oddments\Lotto\Lotto\bin\Debug\netcoreapp2.1\Lotto.deps.json
+D:\MyCodes\oddments\Lotto\Lotto\bin\Debug\netcoreapp2.1\Lotto.runtimeconfig.json
+D:\MyCodes\oddments\Lotto\Lotto\bin\Debug\netcoreapp2.1\Lotto.runtimeconfig.dev.json
+D:\MyCodes\oddments\Lotto\Lotto\bin\Debug\netcoreapp2.1\Lotto.dll
+D:\MyCodes\oddments\Lotto\Lotto\bin\Debug\netcoreapp2.1\Lotto.pdb
+D:\MyCodes\oddments\Lotto\Lotto\obj\Debug\netcoreapp2.1\Lotto.csprojAssemblyReference.cache
+D:\MyCodes\oddments\Lotto\Lotto\obj\Debug\netcoreapp2.1\Lotto.csproj.CoreCompileInputs.cache
+D:\MyCodes\oddments\Lotto\Lotto\obj\Debug\netcoreapp2.1\Lotto.AssemblyInfoInputs.cache
+D:\MyCodes\oddments\Lotto\Lotto\obj\Debug\netcoreapp2.1\Lotto.AssemblyInfo.cs
+D:\MyCodes\oddments\Lotto\Lotto\obj\Debug\netcoreapp2.1\Lotto.dll
+D:\MyCodes\oddments\Lotto\Lotto\obj\Debug\netcoreapp2.1\Lotto.pdb
