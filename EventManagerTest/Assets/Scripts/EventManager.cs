@@ -4,8 +4,8 @@ using UnityEngine;
 
 public enum EVENT_TYPE
 {
-    LOADING_ACTIVE,  
-    LOADING_INACTIVE,
+    OBJECT_ACTIVE,  
+    OBJECT_INACTIVE,
 }
 public class EventManager : MonoBehaviour
 {

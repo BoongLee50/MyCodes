@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\EventManager.cs" />
+    <Compile Include="Assets\Scripts\TestSceneManager.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/MyCodes/EventManagerTest/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
