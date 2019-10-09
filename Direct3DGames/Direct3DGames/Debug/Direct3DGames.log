@@ -1,2 +1,6 @@
-﻿  Direct3DGames.cpp
+﻿  stdafx.cpp
+  CD3DApp.cpp
+  Direct3DGames.cpp
+  GameCode.cpp
+  코드를 생성하고 있습니다...
   Direct3DGames.vcxproj -> D:\MyCodes\Direct3DGames\Debug\Direct3DGames.exe
