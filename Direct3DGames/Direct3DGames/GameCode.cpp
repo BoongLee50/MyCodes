@@ -12,7 +12,7 @@ GameCode::~GameCode(void)
 
 void GameCode::OnInit()
 {
-
+	
 }
 
 void GameCode::OnRender()
