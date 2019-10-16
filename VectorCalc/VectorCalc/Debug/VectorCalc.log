@@ -1,3 +1,2 @@
 ﻿  VectorCalc.cpp
-D:\MyCodes\VectorCalc\VectorCalc\VectorCalc.cpp(10,8): warning C4101: 'fLength' :참조되지 않은 지역 변수입니다.
   VectorCalc.vcxproj -> D:\MyCodes\VectorCalc\Debug\VectorCalc.exe
