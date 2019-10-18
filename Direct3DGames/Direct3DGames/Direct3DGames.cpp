@@ -3,7 +3,7 @@
 #include "stdafx.h"
 #include "framework.h"
 #include "Direct3DGames.h"
-#include <d3d9.h>
+#include "GameCode.h"
 
 #define MAX_LOADSTRING 100
 
@@ -13,6 +13,8 @@ WCHAR szTitle[MAX_LOADSTRING];                  // 제목 표시줄 텍스트입
 WCHAR szWindowClass[MAX_LOADSTRING];            // 기본 창 클래스 이름입니다.
 HWND g_hWnd;
 
+GameCode g_GameCode01;
+
 LPDIRECT3D9         g_pD3D = NULL;				// Used to create the D3DDevice
 LPDIRECT3DDEVICE9   g_pd3dDevice = NULL;		// Our rendering device
 
@@ -21,52 +23,6 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
-
-HRESULT InitD3D(HWND hWnd)
-{
-	if (NULL == (g_pD3D = Direct3DCreate9(D3D_SDK_VERSION)))
-		return E_FAIL;
-
-	D3DPRESENT_PARAMETERS d3dpp;
-	ZeroMemory(&d3dpp, sizeof(d3dpp));
-	d3dpp.Windowed = TRUE;
-	d3dpp.SwapEffect = D3DSWAPEFFECT_DISCARD;
-	d3dpp.BackBufferFormat = D3DFMT_UNKNOWN;
-
-	if (FAILED(g_pD3D->CreateDevice(D3DADAPTER_DEFAULT, D3DDEVTYPE_HAL, hWnd,
-		D3DCREATE_SOFTWARE_VERTEXPROCESSING,
-		&d3dpp, &g_pd3dDevice)))
-	{
-		return E_FAIL;
-	}
-
-	return S_OK;
-}
-
-void Render()
-{
-	if (NULL == g_pd3dDevice)
-		return;
-
-	g_pd3dDevice->Clear(0, NULL, D3DCLEAR_TARGET, D3DCOLOR_XRGB(0, 255, 0), 1.0f, 0);
-
-	if (SUCCEEDED(g_pd3dDevice->BeginScene()))
-	{
-
-		g_pd3dDevice->EndScene();
-	}
-
-	g_pd3dDevice->Present(NULL, NULL, NULL, NULL);
-}
-
-void CleanUp()
-{
-	if (g_pd3dDevice != NULL)
-		g_pd3dDevice->Release();
-
-	if (g_pD3D != NULL)
-		g_pD3D->Release();
-}
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -91,10 +47,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
-	InitD3D(g_hWnd);
+	g_GameCode01.InitD3D(g_hWnd);
 
     // 기본 메시지 루프입니다:
-	while (GetMessage(&msg, nullptr, 0, 0))
+	while (true)
 	{
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
@@ -106,7 +62,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
-			Render();
+			g_GameCode01.Update();
+			g_GameCode01.Render();
 		}
 	}
 
@@ -210,7 +167,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_DESTROY:
-		CleanUp();
+		g_GameCode01.Cleanup();
         PostQuitMessage(0);
         break;
     default:
