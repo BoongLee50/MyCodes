@@ -5,6 +5,14 @@
 #include "Axis.h"
 //#include "Cube.h"
 
+struct TEAPOT_PROPERTY
+{
+	float fScaling;
+	float fRotX, fRotY, fRotZ;
+	D3DXVECTOR3 vTranslation;
+	TEAPOT_PROPERTY() : fScaling(1.0f) {}
+};
+
 class GameCode : public CD3DApp
 {
 	//Triangle m_Triangle;
@@ -15,10 +23,9 @@ class GameCode : public CD3DApp
 	D3DXVECTOR3 m_Eye, m_At, m_Up;
 	CAxis m_Axis;
 
-	LPD3DXMESH m_pBoxMesh;
-	LPD3DXMESH m_pSphereMesh;
+	TEAPOT_PROPERTY m_TeapotProperty[3];
 	LPD3DXMESH m_pTeapotMesh;
-	LPD3DXMESH m_pCylinderMesh;
+	int m_nAngle;
 	
 	virtual void OnInit();
 	virtual void OnRender();

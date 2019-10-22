@@ -25,9 +25,9 @@ void GameCode::OnInit()
 	vp.MinZ = 0.0f;
 	vp.MaxZ = 1.0f;
 
-	m_Eye.x = 5.0f;
-	m_Eye.y = 8.0f;
-	m_Eye.z = -10.0f;
+	m_Eye.x = 10.0f;
+	m_Eye.y = 10.0f;
+	m_Eye.z = -15.0f;
 
 	m_At.x = 0.0f;
 	m_At.y = 0.0f;
@@ -46,10 +46,7 @@ void GameCode::OnInit()
 
 	m_Axis.OnInit(m_pd3dDevice);
 
-	D3DXCreateBox(m_pd3dDevice, 2.0f, 2.0f, 2.0f, &m_pBoxMesh, NULL);
-	D3DXCreateSphere( m_pd3dDevice, 3.0f, 30, 10, &m_pSphereMesh, NULL );   
 	D3DXCreateTeapot( m_pd3dDevice, &m_pTeapotMesh, NULL );
-	D3DXCreateCylinder(m_pd3dDevice, 2.0f, 2.0f, 5.0f, 30, 10, &m_pCylinderMesh, NULL);
 
 	//m_Triangle.OnInit(m_pd3dDevice);
 	//m_Cube.OnInit(m_pd3dDevice);
@@ -57,19 +54,36 @@ void GameCode::OnInit()
 
 void GameCode::OnRender()
 {
+	D3DXMATRIX matRotationY, matWorld, matTrans, matScaling;
+	float fScaling[3] = { 0.3f, 0.6f, 1.0f };
+	D3DXVECTOR3 vTrans[3] = { D3DXVECTOR3(0.0f, 0.0f, 0.0f), D3DXVECTOR3(2.0f, 0.0f, 0.0f), D3DXVECTOR3(5.0f, 0.0f, 0.0f) };
+
+	D3DXMatrixRotationY(&matRotationY, GetTickCount() * 0.004f);
+
 	m_Axis.OnRender();
 
 	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
 	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
-	m_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
-	m_pBoxMesh->DrawSubset(0);
-	m_pSphereMesh->DrawSubset(0);
-	m_pTeapotMesh->DrawSubset(0);	
-	m_pCylinderMesh->DrawSubset(0);
+	D3DXMatrixRotationY(&matRotationY, GetTickCount() * 0.004f);
 
-	//m_Cube.OnRender();
-	//m_Triangle.OnRender();
+	D3DXMatrixScaling(&matScaling, fScaling[0], fScaling[0], fScaling[0]);
+	D3DXMatrixTranslation(&matTrans, vTrans[0].x, vTrans[0].y, vTrans[0].z);
+	matWorld = matScaling * matRotationY * matTrans;		//SRT
+	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	m_pTeapotMesh->DrawSubset(0);
+
+	D3DXMatrixScaling(&matScaling, fScaling[1], fScaling[1], fScaling[1]);
+	D3DXMatrixTranslation(&matTrans, vTrans[1].x, vTrans[1].y, vTrans[1].z);
+	matWorld = matScaling * matRotationY * matTrans;		//SRT
+	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	m_pTeapotMesh->DrawSubset(0);
+
+	D3DXMatrixScaling(&matScaling, fScaling[2], fScaling[2], fScaling[2]);
+	D3DXMatrixTranslation(&matTrans, vTrans[2].x, vTrans[2].y, vTrans[2].z);
+	matWorld = matScaling * matTrans * matRotationY;		//STR
+	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
+	m_pTeapotMesh->DrawSubset(0);
 }
 
 void GameCode::OnUpdate()
@@ -79,11 +93,7 @@ void GameCode::OnUpdate()
 
 void GameCode::OnRelease()
 {
-	m_pCylinderMesh->Release();
 	m_pTeapotMesh->Release();
-	m_pSphereMesh->Release();
-	m_pBoxMesh->Release();
-
 	m_Axis.OnRelease();
 
 	//m_Cube.OnRelease();
