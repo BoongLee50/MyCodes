@@ -45,16 +45,31 @@ void GameCode::OnInit()
 	m_pd3dDevice->SetViewport(&vp);
 
 	m_Axis.OnInit(m_pd3dDevice);
-	m_Cube.OnInit(m_pd3dDevice);
+
+	D3DXCreateBox(m_pd3dDevice, 2.0f, 2.0f, 2.0f, &m_pBoxMesh, NULL);
+	D3DXCreateSphere( m_pd3dDevice, 3.0f, 30, 10, &m_pSphereMesh, NULL );   
+	D3DXCreateTeapot( m_pd3dDevice, &m_pTeapotMesh, NULL );
+	D3DXCreateCylinder(m_pd3dDevice, 2.0f, 2.0f, 5.0f, 30, 10, &m_pCylinderMesh, NULL);
 
 	//m_Triangle.OnInit(m_pd3dDevice);
+	//m_Cube.OnInit(m_pd3dDevice);
 }
 
 void GameCode::OnRender()
 {
-	//m_Triangle.OnRender();
 	m_Axis.OnRender();
-	m_Cube.OnRender();
+
+	m_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE);
+	m_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME);
+	m_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+	m_pBoxMesh->DrawSubset(0);
+	m_pSphereMesh->DrawSubset(0);
+	m_pTeapotMesh->DrawSubset(0);	
+	m_pCylinderMesh->DrawSubset(0);
+
+	//m_Cube.OnRender();
+	//m_Triangle.OnRender();
 }
 
 void GameCode::OnUpdate()
@@ -64,7 +79,13 @@ void GameCode::OnUpdate()
 
 void GameCode::OnRelease()
 {
-	//m_Triangle.OnRelease();
+	m_pCylinderMesh->Release();
+	m_pTeapotMesh->Release();
+	m_pSphereMesh->Release();
+	m_pBoxMesh->Release();
+
 	m_Axis.OnRelease();
-	m_Cube.OnRelease();
+
+	//m_Cube.OnRelease();
+	//m_Triangle.OnRelease();
 }
