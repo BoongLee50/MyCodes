@@ -48,6 +48,8 @@ void GameCode::OnInit()
 
 	D3DXCreateTeapot( m_pd3dDevice, &m_pTeapotMesh, NULL );
 
+	m_Ground.Create(m_pd3dDevice, 20, 20, 2.0f);
+
 	//m_Triangle.OnInit(m_pd3dDevice);
 	//m_Cube.OnInit(m_pd3dDevice);
 }
@@ -84,6 +86,8 @@ void GameCode::OnRender()
 	matWorld = matScaling * matTrans * matRotationY;		//STR
 	m_pd3dDevice->SetTransform(D3DTS_WORLD, &matWorld);
 	m_pTeapotMesh->DrawSubset(0);
+
+	m_Ground.OnRender();
 }
 
 void GameCode::OnUpdate()
@@ -95,6 +99,7 @@ void GameCode::OnRelease()
 {
 	m_pTeapotMesh->Release();
 	m_Axis.OnRelease();
+	m_Ground.OnRelease();
 
 	//m_Cube.OnRelease();
 	//m_Triangle.OnRelease();

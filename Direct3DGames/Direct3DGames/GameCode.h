@@ -4,6 +4,7 @@
 #include <D3dx9shape.h>
 #include "Axis.h"
 //#include "Cube.h"
+#include "Ground.h"
 
 struct TEAPOT_PROPERTY
 {
@@ -17,6 +18,8 @@ class GameCode : public CD3DApp
 {
 	//Triangle m_Triangle;
 	//CCube m_Cube;
+
+	CGround m_Ground;
 
 	D3DXMATRIX m_matView;
 	D3DXMATRIX m_matProj;
