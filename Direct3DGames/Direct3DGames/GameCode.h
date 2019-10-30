@@ -1,9 +1,9 @@
 #pragma once
 #include "CD3DApp.h"
-//#include "Triangle.h"
 #include <D3dx9shape.h>
+#include <conio.h>
+#include <fmod.h>
 #include "Axis.h"
-//#include "Cube.h"
 #include "Ground.h"
 
 struct TEAPOT_PROPERTY
@@ -16,9 +16,6 @@ struct TEAPOT_PROPERTY
 
 class GameCode : public CD3DApp
 {
-	//Triangle m_Triangle;
-	//CCube m_Cube;
-
 	CGround m_Ground;
 
 	D3DXMATRIX m_matView;
@@ -29,7 +26,7 @@ class GameCode : public CD3DApp
 	TEAPOT_PROPERTY m_TeapotProperty[3];
 	LPD3DXMESH m_pTeapotMesh;
 	int m_nAngle;
-	
+
 	virtual void OnInit();
 	virtual void OnRender();
 	virtual void OnUpdate();
